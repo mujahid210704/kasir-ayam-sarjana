@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kasir Ayam Sarjana</title>
+</head>
+<body>
+    <h2>Form Pesanan</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {% for menu in menu_list %}
+            <div>
+                <label>{{ menu.nama }} (Rp {{ menu.harga }})</label>
+                <input type="number" name="menu_{{ menu.id }}" value="0" min="0">
+            </div>
+        {% endfor %}
+        <button type="submit">Simpan Pesanan</button>
+    </form>
+</body>
+</html>
