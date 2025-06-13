@@ -3,6 +3,12 @@
 <html>
 <head>
     <title>Nota Transaksi</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f9f9f9; }
+        table { width: 70%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; border: 1px solid #000; text-align: left; }
+        h3 { margin-top: 20px; }
+    </style>
 </head>
 <body>
     <h2>Nota Transaksi</h2>
@@ -10,7 +16,7 @@
     <p><strong>No Transaksi:</strong> {{ transaksi.id }}</p>
     <p><strong>Tanggal:</strong> {{ transaksi.tanggal|date:"d M Y H:i" }}</p>
 
-    <table border="1" cellpadding="8" cellspacing="0">
+    <table>
         <thead>
             <tr>
                 <th>Menu</th>
