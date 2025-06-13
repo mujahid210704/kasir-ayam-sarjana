@@ -1,34 +1,38 @@
+{% load humanize %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Nota Transaksi</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f9f9f9; }
-        table { width: 50%; border-collapse: collapse; }
-        th, td { padding: 10px; border: 1px solid #000; text-align: left; }
-    </style>
 </head>
 <body>
     <h2>Nota Transaksi</h2>
-    <p>Waktu: {{ transaksi.waktu }}</p>
 
-    <table>
-        <tr>
-            <th>Menu</th>
-            <th>Jumlah</th>
-            <th>Harga</th>
-            <th>Subtotal</th>
-        </tr>
-        {% for item in items %}
-        <tr>
-            <td>{{ item.menu.nama }}</td>
-            <td>{{ item.jumlah }}</td>
-            <td>{{ item.harga_format }}</td>
-            <td>{{ item.subtotal_format }}</td>
-        </tr>
-        {% endfor %}
+    <p><strong>No Transaksi:</strong> {{ transaksi.id }}</p>
+    <p><strong>Tanggal:</strong> {{ transaksi.tanggal|date:"d M Y H:i" }}</p>
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Menu</th>
+                <th>Jumlah</th>
+                <th>Harga</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in transaksi.itemtransaksi_set.all %}
+            <tr>
+                <td>{{ item.menu.nama }}</td>
+                <td>{{ item.jumlah }}</td>
+                <td>Rp {{ item.menu.harga|intcomma }}</td>
+                <td>Rp {{ item.total_harga|intcomma }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 
-    <h3>Total: {{ total }}</h3>
+    <h3>Total Bayar: Rp {{ transaksi.total_bayar|intcomma }}</h3>
+
+    <p><a href="{% url 'buat_pesanan' %}">Buat Pesanan Baru</a></p>
 </body>
 </html>
